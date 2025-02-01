@@ -1,0 +1,20 @@
+install followings 
+
+1- MongoDB Download
+2- MongoDB Shell
+3- MongoDB Atlas (login online)
+--------------------------------------
+
+Now after installations of all that 
+run commands in CMD 
+Commands -:
+    mongod --version     (for checking the MongoDB version)
+    net start mongoDB    (for start MongoDB services)
+    net stop mongoDB     (for stop MongoDB services)
+----------------------------------------------
+
+    mongosh              (enable mongoshell)
+    show dbs;
+    use sadam;
+    db.createCollection("users")
+    show collections;

@@ -1,4 +1,4 @@
-// insertOne data query
+// insertOne query
 db.users.insertOne({ name: "Sadam", age: 22 });
 
 // insertMany

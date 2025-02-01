@@ -1,0 +1,16 @@
+Definition of a Database ?
+A database is an organized collection of data that is stored and managed in a way that allows for easy access,
+retrieval, manipulation, and management.
+
+Types of Databases ?
+
+Relational Databases (RDBMS):
+    Stores data in tables with rows and columns.
+    Uses SQL (Structured Query Language) to manage data.
+    Examples: MySQL, PostgreSQL, Oracle, SQLite.
+
+NoSQL Databases:
+
+    Designed for handling unstructured or semi-structured data.
+    Flexible schemas, allowing data to be stored in various formats like key-value pairs, documents, or graphs.
+    Examples: MongoDB, Cassandra, Redis, CouchDB.

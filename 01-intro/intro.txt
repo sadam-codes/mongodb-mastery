@@ -14,3 +14,60 @@ NoSQL Databases:
     Designed for handling unstructured or semi-structured data.
     Flexible schemas, allowing data to be stored in various formats like key-value pairs, documents, or graphs.
     Examples: MongoDB, Cassandra, Redis, CouchDB.
+
+
+MongoDB ?
+    MongoDB is a type of database that stores data in a flexible way using documents (like JSON objects), 
+    instead of traditional tables. It is a NoSQL database, meaning it doesn't require a fixed structure 
+    (schema) for storing data, making it easy to handle different types of information.
+    MongoDB is good for handling large amounts of data, and it's easy to scale when needed. It's commonly 
+    used in applications that need fast and flexible data storage, like websites, mobile apps, and big data 
+    systems.
+
+Key Features of MongoDB ??
+    1- Document-Orient
+    2- Schema-less
+    3- Indexing
+    4- Aggregation Framework
+    5- Scalability
+
+--------------------------------
+
+MySQL    |    MongoDB 
+
+Database |  Database
+tables   |  collections
+rows     |  documents
+columns  |  fields
+
+--------------------------------
+
+[
+  {
+    "name": "Sadam",
+    "age": 22
+  },
+  {
+    "name": "Ali",
+    "age": 23
+  }
+]
+
+
+database    = students
+collections = users
+documents   = 2
+fields      = name , age
+
+---------------------------------
+
+BSON ?
+    BSON (Binary JSON) is a binary representation of JSON (JavaScript Object Notation). 
+    It is the format used by MongoDB to store documents in a more efficient, compact, and 
+    machine-readable way.
+
+    The document that was stored in a JSON , for use it was just JSON data , but behind the scene,
+    it is in BSON.
+    BSON converts the data into binary form , so that the traversal should be fast.
+
+----------------------------------

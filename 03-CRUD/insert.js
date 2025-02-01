@@ -1,20 +1,7 @@
-// insert data query
+// insertOne data query
 db.users.insertOne({ name: "Sadam", age: 22 });
 
-// Embeded or nested data
-
-db.users.insertOne({
-  name: "sadam",
-  age: 22,
-  address: [
-    {
-      type: "home",
-      city: "Multan",
-    },
-  ],
-});
-
-// insert many
+// insertMany
 
 db.users.insertMany([
   {
@@ -34,4 +21,14 @@ db.users.insertMany([
   },
 ]);
 
-
+// Embeded or nested data
+db.users.insertOne({
+  name: "Hasnain",
+  age: 22,
+  address: [
+    {
+      type: "home",
+      city: "jhang",
+    },
+  ],
+});

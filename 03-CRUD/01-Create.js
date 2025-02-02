@@ -7,17 +7,17 @@ db.users.insertMany([
   {
     _id: 1,
     name: "Ahmad",
-    email: "ahmad@example.com",
+    email: "ahmad@gmail.com",
   },
   {
     _id: 2,
     name: "Ali",
-    email: "ali@example.com",
+    email: "ali@gmail.com",
   },
   {
     _id: 3,
     name: "Sara",
-    email: "sara@example.com",
+    email: "sara@gmail.com",
   },
 ]);
 

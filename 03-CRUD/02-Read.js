@@ -39,3 +39,7 @@ db.users.find({ age: { $gte: 25, $lte: 30 } });
 db.users.find({ age: { $gte: 25, $lte: 30 } }).count();
 
 //if u will apply findOne ,then it will only give top one document
+
+// find typeof any field
+typeof db.users.findOne().name;
+typeof db.users.findOne().age;

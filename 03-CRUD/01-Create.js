@@ -28,7 +28,7 @@ db.users.insertOne({
   address: [
     {
       type: "home",
-      city: "jhang",
+      city: "Multan",
     },
   ],
 });

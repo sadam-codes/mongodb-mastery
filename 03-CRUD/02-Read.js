@@ -8,6 +8,7 @@ db.users.findOne({ name: "Sadam" });
 db.users.find({ name: "Ali" });
 
 // Find by _id
+db.users.find({ _id: ObjectId("123") });
 db.users.find({ _id: 1 });
 
 //  Find and Limit the Number of Results
@@ -29,3 +30,12 @@ db.users.countDocuments({ name: "Ali" });
 // Find One Document and Return Only a Specific Field
 db.users.findOne({ name: "Hasnain" }, { age: 1, _id: 0 });
 
+// find using less than and greater than queries
+db.users.find({ age: { $lt: 25 } });
+db.users.find({ age: { $lte: 25 } });
+db.users.find({ age: { $gt: 25 } });
+db.users.find({ age: { $gte: 25 } });
+db.users.find({ age: { $gte: 25, $lte: 30 } });
+db.users.find({ age: { $gte: 25, $lte: 30 } }).count();
+
+//if u will apply findOne ,then it will only give top one document

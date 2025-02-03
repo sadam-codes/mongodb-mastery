@@ -47,5 +47,5 @@ db.users.insertMany(
 );
 
 // by-default { ordered: true }
-// Now this will not save _id : 3 data , due to same key
+// Now this will not save _id : 3 data , due to same key/_id
 // but will save all other data instead of matched _id

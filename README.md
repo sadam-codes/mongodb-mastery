@@ -14,3 +14,10 @@ Contributing
 ###### Introduction
 
 MongoDB is a NoSQL, document-oriented database that stores data in BSON format, making it flexible and scalable. Unlike relational databases, MongoDB doesn't require a fixed schema.
+
+#### CRUD
+
+Create
+Read
+Update
+Delete

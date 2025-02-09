@@ -4,7 +4,9 @@ db.users.insertOne({ name: "Ali", age: 25 });
 db.users.find();
 
 // comparison operators
+// basic
 db.users.find({ name: sadam });
+db.users.find({ age: 25 });
 
 // equal to and not equal to ....
 db.users.find({ name: { $eq: sadam } });

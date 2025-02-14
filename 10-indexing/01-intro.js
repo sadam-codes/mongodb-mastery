@@ -19,3 +19,16 @@
 // Too many indexes slow down write operations (inserts, updates, deletes).
 // If a field is rarely queried, indexing it wastes memory.
 // Small collections don't need indexing since scanning is already fast.
+
+// 3. Types of Indexes in MongoDB
+
+// i) Single Field Index
+// Creates an index on one field.
+// Helps optimize queries that search for values based on that field.
+db.students.createIndex({ name: 1 }); // 1 -> Ascending order
+
+// ii) Compound Index
+
+// Creates an index on multiple fields.
+// Useful when queries filter data using multiple fields.
+db.students.createIndex({ name: 1, age: -1 }); // name ascending, age descending

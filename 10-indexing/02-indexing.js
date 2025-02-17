@@ -86,4 +86,17 @@ db.students.find();
 db.students.find({ name: "Hassan Ali", age: 24 });
 db.students.find({ $and: [{ name: "Hassan Ali" }, { age: 24 }] });
 // -----------
-// indexing
+// without indexing
+db.students.find({ age: { $lte: 20 } }).explain();
+db.students.find({ age: { $lte: 20 } }).explain("executionStats")
+// this will show collection scan
+
+
+//indexing
+db.students.createIndex({ age: 1 })
+db.students.getIndexes() // check indexes
+db.students.dropIndex("age_1") // delete Index
+// now again run following command and check executionStats
+// total documents examined and returned and IndexScan
+db.students.find({ age: { $lte: 20 } }).explain();
+db.students.find({ age: { $lte: 20 } }).explain("executionStats")

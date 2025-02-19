@@ -32,3 +32,4 @@ db.students.createIndex({ name: 1 }); // 1 -> Ascending order
 // Creates an index on multiple fields.
 // Useful when queries filter data using multiple fields.
 db.students.createIndex({ name: 1, age: -1 }); // name ascending, age descending
+

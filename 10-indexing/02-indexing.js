@@ -100,3 +100,8 @@ db.students.dropIndex("age_1") // delete Index
 // total documents examined and returned and IndexScan
 db.students.find({ age: { $lte: 20 } }).explain();
 db.students.find({ age: { $lte: 20 } }).explain("executionStats")
+
+// compound indexing
+db.students.createIndex({ name: 1, age: -1 }); // name ascending, age descending
+
+

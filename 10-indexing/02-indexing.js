@@ -102,6 +102,11 @@ db.students.find({ age: { $lte: 20 } }).explain();
 db.students.find({ age: { $lte: 20 } }).explain("executionStats")
 
 // compound indexing
-db.students.createIndex({ name: 1, age: -1 }); // name ascending, age descending
+db.students.createIndex({ name: 1, age: -1 }); // name ascending, age descending (Order matters)
+//  Make 2nd index
+db.students.createIndex({ "age": 1, "cgpa": 1 })
+db.students.find({ age: { $gte: 20 }, cgpa: { $gte: 3.3 } }).explain("executionStats")  //  stage: 'IXSCAN',
+db.students.find({ age: { $gte: 20 } }).explain("executionStats")    //  stage: 'IXSCAN',
+db.students.find({ cgpa: { $gte: 3.3 } }).explain("executionStats")  //   stage: 'COLLSCAN',
 
 

@@ -33,3 +33,6 @@ db.students.createIndex({ name: 1 }); // 1 -> Ascending order
 // Useful when queries filter data using multiple fields.
 db.students.createIndex({ name: 1, age: -1 }); // name ascending, age descending
 
+// iii) Text Index
+// A text index in MongoDB allows you to perform text searches on string fields within a collection. 
+// You can create a text index on a single field or multiple fields.

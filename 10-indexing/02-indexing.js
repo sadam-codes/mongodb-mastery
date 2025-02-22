@@ -171,6 +171,7 @@ winningPlan: {
 }
 
 //-----------------------------------------
+
 // Multi key index ?
 
 // A multi-key index is an index that MongoDB creates when you index on array field.
@@ -190,5 +191,26 @@ db.students.find({ subjects: "Math" }).count();  //   2
 db.students.find({ subjects: "Biology" }).explain("executionStats"); //   stage: 'IXSCAN',
 db.students.find({ subjects: "Biology" }).count();  //   2
 
+// ------------------------------------------
+// Text index ?
 
+// A text index in MongoDB is used to efficiently search text-based data within string fields.
+//  It allows you to perform full-text searches on documents.
 
+db.students.createIndex({ name: "text" });
+db.students.find({ $text: { $search: "Sadam" } });
+
+// MongoDB will search for "Sadam" in the name field.
+// The text index helps find matches quickly.
+
+//  Multiple Fields in a Text Index
+db.students.createIndex({ name: "text", bio: "text" });
+// Now, searches will check both name and bio fields.
+
+// Using Multiple Keywords
+db.students.find({ $text: { $search: "Sadam CS" } });
+// Finds documents where either "Sadam" or "CS" appears.
+
+// Exclude 
+db.students.find({ $text: { $search: "Sadam -CS" } });
+// Finds documents with "Sadam" but not "CS".

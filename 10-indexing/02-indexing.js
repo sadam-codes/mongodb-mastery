@@ -108,5 +108,16 @@ db.students.createIndex({ "age": 1, "cgpa": 1 })
 db.students.find({ age: { $gte: 20 }, cgpa: { $gte: 3.3 } }).explain("executionStats")  //  stage: 'IXSCAN',
 db.students.find({ age: { $gte: 20 } }).explain("executionStats")    //  stage: 'IXSCAN',
 db.students.find({ cgpa: { $gte: 3.3 } }).explain("executionStats")  //   stage: 'COLLSCAN',
+db.students.createIndex({ name: 1 }, { unique: true }); // 2 names should't be same
+// partial Filter
+db.students.createIndex({ age: 1 }, { partialFilterExpression: { age: { $gt: 22 } } });
+db.students.createIndex({ "expires": 1 }, { expireAfterSeconds: 3600 })// this works on dated fields and single field index
 
-
+// covered Query ?
+// A covered Query is a query in which 
+// 1) All fields in the query are part of an index
+// 2) All the fields returned in a query are in the same index
+// Example
+db.students.find({ name: "Sadam" }, { _id: 0, name: 1 })
+db.students.find({ name: "Sadam" }, { _id: 0, name: 1 }).explain("executionStats")  //  stage: 'PROJECTION_COVERED', ||  stage: 'IXSCAN', 
+db.students.find({ name: "Sadam" }).explain("executionStats")  //   stage: 'FETCH', ||  stage: 'IXSCAN', 

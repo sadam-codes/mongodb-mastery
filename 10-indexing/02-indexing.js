@@ -121,3 +121,47 @@ db.students.createIndex({ "expires": 1 }, { expireAfterSeconds: 3600 })// this w
 db.students.find({ name: "Sadam" }, { _id: 0, name: 1 })
 db.students.find({ name: "Sadam" }, { _id: 0, name: 1 }).explain("executionStats")  //  stage: 'PROJECTION_COVERED', ||  stage: 'IXSCAN', 
 db.students.find({ name: "Sadam" }).explain("executionStats")  //   stage: 'FETCH', ||  stage: 'IXSCAN', 
+
+
+// winning plan
+// in case of multiple indexes for the same query
+
+students > db.students.getIndexes()
+[
+  { v: 2, key: { _id: 1 }, name: '_id_' },
+  { v: 2, key: { name: 1 }, name: 'name_1' },
+  { v: 2, key: { name: 1, cgpa: 1 }, name: 'name_1_cgpa_1' }
+]
+// Which Index Will MongoDB Use?
+// If you run this query -:
+db.students.find({ name: "Sadam" })
+
+// MongoDB has two possible indexes to use:
+// 1) name_1 (index on name only)
+// 2) name_1_cgpa_1 (compound index on name and cgpa)
+
+// 🔹 How MongoDB Chooses the Index:
+// MongoDB tests both indexes on a small sample of documents.
+// It picks the faster one as the Winning Plan.
+// For future similar queries, it reuses the winning plan (stored in cache) instead of testing again.
+
+// 🔹 Which One Wins?
+// Most likely, MongoDB will use name_1, because:
+
+// The query only has { name: "Sadam" }, so it doesn’t need cgpa.
+// A single-field index is often more efficient than a compound one for a simple lookup.
+// Cache is reset after -:
+// 1) After 1000 writes
+// 2) index is reset
+// 3) mongo server is restarted
+// 4) other indexes are manipulated
+db.students.find({ name: "Sadam" }).explain("allPlansExecution");
+
+//
+rejectedPlans: [
+  { indexName: 'name_1_cgpa_1' }
+]
+//
+winningPlan: {
+  indexName: 'name_1'
+}

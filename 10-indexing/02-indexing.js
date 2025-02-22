@@ -109,9 +109,11 @@ db.students.find({ age: { $gte: 20 }, cgpa: { $gte: 3.3 } }).explain("executionS
 db.students.find({ age: { $gte: 20 } }).explain("executionStats")    //  stage: 'IXSCAN',
 db.students.find({ cgpa: { $gte: 3.3 } }).explain("executionStats")  //   stage: 'COLLSCAN',
 db.students.createIndex({ name: 1 }, { unique: true }); // 2 names should't be same
+//--------------------------------------
 // partial Filter
 db.students.createIndex({ age: 1 }, { partialFilterExpression: { age: { $gt: 22 } } });
 db.students.createIndex({ "expires": 1 }, { expireAfterSeconds: 3600 })// this works on dated fields and single field index
+// -------------------------------------
 
 // covered Query ?
 // A covered Query is a query in which 
@@ -122,6 +124,7 @@ db.students.find({ name: "Sadam" }, { _id: 0, name: 1 })
 db.students.find({ name: "Sadam" }, { _id: 0, name: 1 }).explain("executionStats")  //  stage: 'PROJECTION_COVERED', ||  stage: 'IXSCAN', 
 db.students.find({ name: "Sadam" }).explain("executionStats")  //   stage: 'FETCH', ||  stage: 'IXSCAN', 
 
+//-------------------------------------------------------
 
 // winning plan
 // in case of multiple indexes for the same query
@@ -150,6 +153,7 @@ db.students.find({ name: "Sadam" })
 
 // The query only has { name: "Sadam" }, so it doesn’t need cgpa.
 // A single-field index is often more efficient than a compound one for a simple lookup.
+
 // Cache is reset after -:
 // 1) After 1000 writes
 // 2) index is reset
@@ -165,3 +169,26 @@ rejectedPlans: [
 winningPlan: {
   indexName: 'name_1'
 }
+
+//-----------------------------------------
+// Multi key index ?
+
+// A multi-key index is an index that MongoDB creates when you index on array field.
+//  This allows MongoDB to efficiently search for elements inside arrays.
+
+db.students.insertMany([
+  { _id: 21, name: "Sadam", subjects: ["Math", "Physics", "CS"] },
+  { _id: 22, name: "Ali", subjects: ["Biology", "Math"] },
+  { _id: 23, name: "Ahmed", subjects: ["Physics", "CS"] }
+]);
+
+// Testing
+db.createIndex({ subjects: 1 })
+db.students.find({ subjects: "Math" }).explain("executionStats"); //   stage: 'IXSCAN',
+db.students.find({ subjects: "Math" }).count();  //   2
+// 2nd testing
+db.students.find({ subjects: "Biology" }).explain("executionStats"); //   stage: 'IXSCAN',
+db.students.find({ subjects: "Biology" }).count();  //   2
+
+
+

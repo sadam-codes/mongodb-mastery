@@ -214,3 +214,16 @@ db.students.find({ $text: { $search: "Sadam CS" } });
 // Exclude 
 db.students.find({ $text: { $search: "Sadam -CS" } });
 // Finds documents with "Sadam" but not "CS".
+
+// "A text index can only be created on fields that contain string data or an array of string elements."
+// Since numbers (int, float, double) are not strings, MongoDB ignores them when creating a text index.
+db.students.insertMany([
+  { name: "Sadam", cgpa: 3.8 },
+  { name: "Ali", cgpa: 3.5 },
+  { name: "Ahmed", cgpa: 3.9 }
+]);
+
+// Attempting to create a text index on cgpa
+db.students.createIndex({ cgpa: "text" });
+
+// Cannot create a text index on field 'cgpa' because it is not a string

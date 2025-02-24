@@ -222,8 +222,8 @@ db.students.insertMany([
   { name: "Ali", cgpa: 3.5 },
   { name: "Ahmed", cgpa: 3.9 }
 ]);
-
 // Attempting to create a text index on cgpa
 db.students.createIndex({ cgpa: "text" });
 
 // Cannot create a text index on field 'cgpa' because it is not a string
+//-----------------------------------------
